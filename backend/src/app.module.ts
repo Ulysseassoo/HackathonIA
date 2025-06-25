@@ -5,11 +5,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { UtilsModule } from './utils/utils.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesModule } from './roles/roles.module';
-import { CategoriesModule } from './categories/categories.module';
 import { SkillsModule } from './skills/skills.module';
 import { AiagentsModule } from './aiagents/aiagents.module';
-import { ServicesModule } from './services/services.module';
 import { ProjectsModule } from './projects/projects.module';
 
 @Module({
@@ -27,11 +24,8 @@ import { ProjectsModule } from './projects/projects.module';
     UsersModule,
     AuthModule,
     UtilsModule,
-    RolesModule,
-    CategoriesModule,
     SkillsModule,
     AiagentsModule,
-    ServicesModule,
     ProjectsModule,
   ],
   controllers: [AppController],

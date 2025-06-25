@@ -5,7 +5,6 @@ import {
   IsString,
   MinLength,
   IsBoolean,
-  IsUUID,
   IsInt,
   Min,
 } from 'class-validator';
@@ -38,9 +37,6 @@ export class CreateUserDto {
   @IsInt()
   @Min(0)
   availableToken?: number;
-
-  @IsUUID()
-  roleId: string;
 }
 
 export class UpdateUserDto extends CreateUserDto {}
