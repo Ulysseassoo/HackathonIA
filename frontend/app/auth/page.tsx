@@ -56,7 +56,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-xl flex items-center justify-center absolute top-4 left-4">
-              <span className="text-white font-oswald font-bold text-xl">S</span>
+              <span className="text-white font-oswald font-bold text-xl">C</span>
             </div>
           </div>
         </div>
