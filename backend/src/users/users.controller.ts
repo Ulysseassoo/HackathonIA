@@ -29,7 +29,9 @@ export class UsersController {
       id: user.id,
       fullname: user.fullname,
       email: user.email,
-      role: user.roleId,
+      isVerified: user.isVerified,
+      isServiceProvider: user.isServiceProvider,
+      availableToken: user.availableToken,
     };
   }
 

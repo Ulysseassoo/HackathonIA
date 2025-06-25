@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useQueryClient } from "@tanstack/react-query"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,14 +9,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 import { setToken } from "@/lib/auth"
+import { toast } from "sonner"
+import { useAuthContext } from "@/components/AuthProvider"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3200';
 
 const Auth = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState("login")
   const router = useRouter()
-  const queryClient = useQueryClient()
+  const { forceUpdate } = useAuthContext()
 
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -42,16 +44,17 @@ const Auth = () => {
       })
       if (!res.ok) {
         const err = await res.json()
-        alert(err.message || 'Erreur de connexion')
+        toast.error(err.message || 'Erreur de connexion')
         setIsLoading(false)
         return
       }
       const data = await res.json()
+      
       setToken(data.access_token)
-      queryClient.invalidateQueries({ queryKey: ['user'] })
+      forceUpdate()
       router.push('/chat')
     } catch (err) {
-      alert('Erreur réseau')
+      toast.error('Erreur réseau')
     }
     setIsLoading(false)
   }
@@ -59,7 +62,7 @@ const Auth = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     if (signupForm.password !== signupForm.confirmPassword) {
-      alert('Les mots de passe ne correspondent pas')
+      toast.error('Les mots de passe ne correspondent pas')
       return
     }
     setIsLoading(true)
@@ -75,13 +78,31 @@ const Auth = () => {
       })
       if (!res.ok) {
         const err = await res.json()
-        alert(err.message || 'Erreur lors de l\'inscription')
+        toast.error(err.message || 'Erreur lors de l\'inscription')
         setIsLoading(false)
         return
       }
-      router.push('/auth')
+      
+      toast.success('Compte créé avec succès ! Vous pouvez maintenant vous connecter.')
+      
+      setSignupForm({
+        fullname: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      })
+      
+      setLoginForm({
+        email: signupForm.email,
+        password: ''
+      })
+      
+      setTimeout(() => {
+        setActiveTab("login")
+      }, 500)
+      
     } catch (err) {
-      alert('Erreur réseau')
+      toast.error('Erreur réseau')
     }
     setIsLoading(false)
   }
@@ -106,7 +127,7 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="login" className="w-full">
+            <Tabs defaultValue="login" className="w-full" value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2 mb-6 bg-serenity-lavender/50">
                 <TabsTrigger 
                   value="login"

@@ -4,7 +4,9 @@ export interface User {
   id: string;
   fullname: string;
   email: string;
-  role?: string;
+  isVerified?: boolean;
+  isServiceProvider?: boolean;
+  availableToken?: number;
 }
 
 export const getToken = (): string | null => {
@@ -15,11 +17,13 @@ export const getToken = (): string | null => {
 export const setToken = (token: string): void => {
   if (typeof window === 'undefined') return;
   localStorage.setItem('token', token);
+  window.dispatchEvent(new CustomEvent('tokenChanged', { detail: { token } }));
 };
 
 export const removeToken = (): void => {
   if (typeof window === 'undefined') return;
   localStorage.removeItem('token');
+  window.dispatchEvent(new CustomEvent('tokenChanged', { detail: { token: null } }));
 };
 
 export const fetchUser = async (): Promise<User> => {

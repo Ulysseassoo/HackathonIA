@@ -4,7 +4,6 @@ import { UtilsService } from '../utils/utils.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../users/dtos/users.dto';
 import * as argon2 from 'argon2';
-import { RolesService } from '../roles/roles.service';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +11,6 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly utilsService: UtilsService,
     private readonly jwtService: JwtService,
-    private readonly rolesService: RolesService,
   ) {}
 
   async register(body: CreateUserDto) {
@@ -20,16 +18,8 @@ export class AuthService {
     if (existing) {
       throw new BadRequestException('Email déjà utilisé');
     }
-    let roleId = body.roleId;
-    if (!roleId) {
-      let role = await this.rolesService.findByName('ROLE_USER');
-      if (!role) {
-        role = await this.rolesService.create({ name: 'ROLE_USER' });
-      }
-      roleId = role.id;
-    }
     const hashed = await this.utilsService.hashPassword(body.password);
-    const user = await this.usersService.create({ ...body, password: hashed, roleId });
+    const user = await this.usersService.create({ ...body, password: hashed });
     return { id: user.id, email: user.email, fullname: user.fullname };
   }
 
@@ -42,7 +32,7 @@ export class AuthService {
     if (!valid) {
       throw new UnauthorizedException('Identifiants invalides');
     }
-    const payload = { sub: user.id, email: user.email, role: user.roleId };
+    const payload = { sub: user.id, email: user.email };
     const token = await this.jwtService.signAsync(payload);
     return { access_token: token };
   }
