@@ -66,7 +66,7 @@ const Landing = () => {
             <h1 className="text-5xl md:text-7xl font-oswald font-bold mb-6 leading-tight">
               Bienvenue sur{" "}
               <span className="bg-gradient-to-r from-serenity-blue to-serenity-accent bg-clip-text text-transparent">
-                Sérénité
+                Connexio
               </span>
             </h1>
 
@@ -174,7 +174,7 @@ const Landing = () => {
             Prêt à transformer vos idées ?
           </h2>
           <p className="text-xl font-lato mb-12 opacity-90 max-w-2xl mx-auto">
-            Rejoignez des milliers d'entrepreneurs qui font confiance à Sérénité
+            Rejoignez des milliers d'entrepreneurs qui font confiance à Connexio
             pour leurs projets
           </p>
 

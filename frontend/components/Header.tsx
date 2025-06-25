@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, User, CreditCard, Menu, X, Home } from 'lucide-react';
+import { MessageCircle, Menu, X, Home } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
@@ -21,20 +21,18 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-serenity-lavender/30 glass-effect">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div 
             className="flex items-center space-x-2 cursor-pointer group"
             onClick={() => router.push('/')}
           >
             <div className="w-10 h-10 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-oswald font-bold text-lg">S</span>
+              <span className="text-white font-oswald font-bold text-lg">C</span>
             </div>
             <span className="text-xl font-oswald font-semibold text-serenity-navy group-hover:text-serenity-blue transition-colors">
-              Sérénité
+              Connexio
             </span>
           </div>
 
-          {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Button
@@ -55,7 +53,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Auth Button Desktop */}
           <div className="hidden md:flex items-center space-x-3">
             <Button
               variant="outline"
@@ -67,7 +64,6 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="sm"
@@ -78,7 +74,6 @@ const Header = () => {
           </Button>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t border-serenity-lavender/30 animate-fade-in">
             <nav className="flex flex-col space-y-2">

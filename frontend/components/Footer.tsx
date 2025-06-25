@@ -11,12 +11,12 @@ const Footer = () => {
                 <span className="text-white font-bold text-sm">S</span>
               </div>
               <span className="text-xl font-semibold bg-gradient-to-r from-serenity-blue to-serenity-accent bg-clip-text text-transparent">
-                Sérénité
+                Connexio
               </span>
             </div>
             <p className="text-serenity-navy/70 mb-4 max-w-md font-varela">
               La plateforme qui connecte vos besoins business avec des prestataires humains 
-              et des agents IA intelligents. Simplicité, efficacité, sérénité.
+              et des agents IA intelligents. Simplicité, efficacité, Sérénité.
             </p>
           </div>
 
@@ -65,7 +65,7 @@ const Footer = () => {
 
         <div className="border-t border-serenity-lavender/30 mt-8 pt-8 text-center">
           <p className="text-serenity-navy/50 font-varela">
-            © 2025 Sérénité. Tous droits réservés.
+            © 2025 Connexio. Tous droits réservés.
           </p>
         </div>
       </div>
