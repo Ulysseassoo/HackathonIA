@@ -52,7 +52,6 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative py-20 px-4 gradient-bg overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-72 h-72 bg-serenity-blue rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
@@ -107,7 +106,6 @@ const Landing = () => {
               </Button>
             </div>
 
-            {/* Feature Cards */}
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {features.map((feature, index) => (
                 <Card
@@ -134,7 +132,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* How it works Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -171,7 +168,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-serenity-navy to-serenity-blue text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6">
@@ -195,24 +191,7 @@ const Landing = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-4 bg-serenity-light border-t border-serenity-lavender/30">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <div className="w-8 h-8 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-oswald font-bold">S</span>
-            </div>
-            <span className="text-xl font-oswald font-semibold text-serenity-navy">
-              Sérénité
-            </span>
-          </div>
-          <p className="text-serenity-navy/60 font-varela mb-4">
-            La plateforme intelligente pour tous vos besoins business
-          </p>
-          <p className="text-sm text-serenity-navy/50 font-varela">
-            © 2024 Sérénité. Tous droits réservés.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
