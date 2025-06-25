@@ -59,8 +59,7 @@ export class UsersService {
     const user = await this.userRepository.findOneBy({ id });
     if (!user) return;
 
-    user.firstName = 'Anonymized';
-    user.lastName = 'User';
+    user.fullname = 'Anonymized User';
     user.email = `anonymized_${id}@example.com`;
     user.password = '';
     user.isVerified = false;

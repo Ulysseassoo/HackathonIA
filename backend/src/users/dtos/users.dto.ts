@@ -12,11 +12,7 @@ import {
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
-  firstName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  lastName: string;
+  fullname: string;
 
   @IsEmail()
   email: string;
@@ -40,3 +36,11 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto extends CreateUserDto {}
+
+export class LoginUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  password: string;
+}

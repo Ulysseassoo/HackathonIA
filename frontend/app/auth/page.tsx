@@ -9,6 +9,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3200';
+
 const Auth = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -20,7 +22,7 @@ const Auth = () => {
   })
 
   const [signupForm, setSignupForm] = useState({
-    name: '',
+    fullname: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -29,11 +31,25 @@ const Auth = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    setTimeout(() => {
-      console.log('Login avec Supabase:', loginForm)
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginForm),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        alert(err.message || 'Erreur de connexion')
+        setIsLoading(false)
+        return
+      }
+      const data = await res.json()
+      localStorage.setItem('token', data.access_token)
       router.push('/chat')
-      setIsLoading(false)
-    }, 1500)
+    } catch (err) {
+      alert('Erreur réseau')
+    }
+    setIsLoading(false)
   }
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -43,11 +59,27 @@ const Auth = () => {
       return
     }
     setIsLoading(true)
-    setTimeout(() => {
-      console.log('Inscription avec Supabase:', signupForm)
-      router.push('/chat')
-      setIsLoading(false)
-    }, 1500)
+    try {
+      const res = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullname: signupForm.fullname,
+          email: signupForm.email,
+          password: signupForm.password,
+        }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        alert(err.message || 'Erreur lors de l\'inscription')
+        setIsLoading(false)
+        return
+      }
+      router.push('/auth')
+    } catch (err) {
+      alert('Erreur réseau')
+    }
+    setIsLoading(false)
   }
 
   return (
@@ -148,9 +180,9 @@ const Auth = () => {
                       <Input
                         id="signup-name"
                         type="text"
-                        placeholder="Votre nom"
-                        value={signupForm.name}
-                        onChange={(e) => setSignupForm({...signupForm, name: e.target.value})}
+                        placeholder="Votre nom complet"
+                        value={signupForm.fullname}
+                        onChange={(e) => setSignupForm({ ...signupForm, fullname: e.target.value })}
                         className="pl-10 border-serenity-lavender/50 focus:border-serenity-blue font-varela"
                         required
                       />
