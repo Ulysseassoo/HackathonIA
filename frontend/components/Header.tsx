@@ -20,6 +20,7 @@ const Header = () => {
   const navItems = [
     { path: '/', label: 'Accueil', icon: Home },
     { path: '/chat', label: 'Chat IA', icon: MessageCircle },
+    { path: '/profile', label: 'Profil', icon: User },
   ];
 
   const handleLogout = () => {
@@ -103,6 +104,18 @@ const Header = () => {
                       <p className="text-sm font-medium text-serenity-navy">{user?.fullname}</p>
                       <p className="text-xs text-serenity-navy/60">{user?.email}</p>
                     </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        router.push('/profile');
+                        setIsUserMenuOpen(false);
+                      }}
+                      className="w-full justify-start text-serenity-navy hover:bg-serenity-lavender/50"
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Mon Profil
+                    </Button>
                     <Button
                       variant="ghost"
                       size="sm"

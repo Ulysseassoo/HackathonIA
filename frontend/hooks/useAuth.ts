@@ -3,6 +3,12 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchUser, getToken, removeToken, User } from '@/lib/auth';
 
+export interface ExtendedUser extends User {
+  bio?: string;
+  pricePerDay?: number;
+  skills?: string[];
+}
+
 export const useAuth = () => {
   const router = useRouter();
   const [token, setTokenState] = useState<string | null>(getToken());
@@ -50,7 +56,7 @@ export const useAuth = () => {
   const isInitializing = isLoading && !!token;
 
   return {
-    user,
+    user: user as ExtendedUser | undefined,
     isLoading: isInitializing,
     isAuthenticated,
     error,

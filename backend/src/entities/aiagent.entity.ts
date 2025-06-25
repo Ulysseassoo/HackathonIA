@@ -24,7 +24,10 @@ export class AIAgent {
   description: string;
 
   @Column()
-  url: string;
+  link: string;
+
+  @Column('simple-array', { nullable: true })
+  tags: string[];
 
   @CreateDateColumn()
   createdAt: Date;

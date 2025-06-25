@@ -38,6 +38,9 @@ export class User {
   @Column({ default: 0 })
   pricePerDay: number;
 
+  @Column({ nullable: true })
+  bio: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

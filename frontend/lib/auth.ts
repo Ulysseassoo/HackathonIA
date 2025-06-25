@@ -4,9 +4,12 @@ export interface User {
   id: string;
   fullname: string;
   email: string;
+  bio?: string;
   isVerified?: boolean;
   isServiceProvider?: boolean;
   availableToken?: number;
+  pricePerDay?: number;
+  skills?: string[];
 }
 
 export const getToken = (): string | null => {
