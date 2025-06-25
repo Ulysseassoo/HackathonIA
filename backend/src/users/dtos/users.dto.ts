@@ -13,11 +13,7 @@ import {
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
-  firstName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  lastName: string;
+  fullname: string;
 
   @IsEmail()
   email: string;
@@ -39,8 +35,17 @@ export class CreateUserDto {
   @Min(0)
   availableToken?: number;
 
+  @IsOptional()
   @IsUUID()
   roleId: string;
 }
 
 export class UpdateUserDto extends CreateUserDto {}
+
+export class LoginUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  password: string;
+}

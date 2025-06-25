@@ -11,13 +11,17 @@ import { SkillsModule } from './skills/skills.module';
 import { AiagentsModule } from './aiagents/aiagents.module';
 import { ServicesModule } from './services/services.module';
 import { ProjectsModule } from './projects/projects.module';
+import { ConfigModule } from '@nestjs/config';
+
+console.log(process.env.POSTGRES_PORT);
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }), 
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST || 'localhost',
-      port: 5432,
+      port: parseInt(process.env.POSTGRES_PORT || '5432'),
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
