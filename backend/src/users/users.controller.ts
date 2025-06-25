@@ -7,13 +7,31 @@ import {
   Delete,
   UsePipes,
   ValidationPipe,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dtos/users.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async getCurrentUser(@Request() req) {
+    const user = await this.usersService.findOne(req.user.id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return {
+      id: user.id,
+      fullname: user.fullname,
+      email: user.email,
+      role: user.roleId,
+    };
+  }
 
   @Get()
   findAll() {
