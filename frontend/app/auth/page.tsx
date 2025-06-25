@@ -2,12 +2,14 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useQueryClient } from "@tanstack/react-query"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
+import { setToken } from "@/lib/auth"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3200';
 
@@ -15,6 +17,7 @@ const Auth = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -44,7 +47,8 @@ const Auth = () => {
         return
       }
       const data = await res.json()
-      localStorage.setItem('token', data.access_token)
+      setToken(data.access_token)
+      queryClient.invalidateQueries({ queryKey: ['user'] })
       router.push('/chat')
     } catch (err) {
       alert('Erreur réseau')
