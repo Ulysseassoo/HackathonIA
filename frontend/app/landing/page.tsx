@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { MessageCircle, Users, Zap, ArrowRight, Bot, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import Footer from '@/components/Footer';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { MessageCircle, Users, Zap, ArrowRight, Bot, User } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
 
 const Landing = () => {
   const router = useRouter();
@@ -12,100 +12,118 @@ const Landing = () => {
   const features = [
     {
       icon: MessageCircle,
-      title: 'IA Conversationnelle',
-      description: 'Assistance intelligente 24/7',
-      color: 'from-serenity-blue to-serenity-accent'
+      title: "IA Conversationnelle",
+      description: "Assistance intelligente 24/7",
+      color: "from-serenity-blue to-serenity-accent",
     },
     {
       icon: Users,
-      title: 'Experts Humains',
-      description: 'Prestataires qualifiés',
-      color: 'from-serenity-accent to-purple-500'
+      title: "Experts Humains",
+      description: "Prestataires qualifiés",
+      color: "from-serenity-accent to-purple-500",
     },
     {
       icon: Zap,
-      title: 'Solutions Rapides',
-      description: 'Résultats garantis',
-      color: 'from-gray-500 to-gray-600'
-    }
+      title: "Solutions Rapides",
+      description: "Résultats garantis",
+      color: "from-gray-500 to-gray-600",
+    },
   ];
 
   const steps = [
     {
       step: "01",
       title: "Décrivez votre besoin",
-      description: "Expliquez votre projet ou problème business en quelques mots"
+      description:
+        "Expliquez votre projet ou problème business en quelques mots",
     },
     {
-      step: "02", 
+      step: "02",
       title: "Obtenez des solutions",
-      description: "Notre IA analyse et propose des experts ou agents adaptés"
+      description: "Notre IA analyse et propose des experts ou agents adaptés",
     },
     {
       step: "03",
       title: "Lancez votre projet",
-      description: "Collaborez avec les prestataires sélectionnés et atteignez vos objectifs"
-    }
+      description:
+        "Collaborez avec les prestataires sélectionnés et atteignez vos objectifs",
+    },
   ];
 
   return (
     <div className="min-h-screen">
+      {/* Hero Section */}
       <section className="relative py-20 px-4 gradient-bg overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-72 h-72 bg-serenity-blue rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-serenity-accent rounded-full mix-blend-multiply filter blur-xl animate-float" style={{animationDelay: '2s'}}></div>
+          <div
+            className="absolute top-40 right-10 w-72 h-72 bg-serenity-accent rounded-full mix-blend-multiply filter blur-xl animate-float"
+            style={{ animationDelay: "2s" }}
+          ></div>
         </div>
-        
+
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-oswald font-bold mb-6 leading-tight text-white">
-              Bienvenue sur{' '}
+            <h1 className="text-5xl md:text-7xl font-oswald font-bold mb-6 leading-tight">
+              Bienvenue sur{" "}
               <span className="bg-gradient-to-r from-serenity-blue to-serenity-accent bg-clip-text text-transparent">
                 Sérénité
               </span>
             </h1>
-            
-            <p className="text-xl md:text-2xl font-lato text-white/80 mb-4 leading-relaxed">
-              La plateforme intelligente qui connecte vos besoins business avec des
+
+            <p className="text-xl md:text-2xl font-lato text-serenity-navy/80 mb-4 leading-relaxed">
+              La plateforme intelligente qui connecte vos besoins business avec
+              des
             </p>
-            <p className="text-xl md:text-2xl font-lato mb-12 leading-relaxed text-white">
-              <span className="text-serenity-blue font-semibold">prestataires experts</span> et des{' '}
-              <span className="text-serenity-accent font-semibold">agents IA avancés</span>
+            <p className="text-xl md:text-2xl font-lato mb-12 leading-relaxed">
+              <span className="text-serenity-blue font-semibold">
+                prestataires experts
+              </span>{" "}
+              et des{" "}
+              <span className="text-serenity-accent font-semibold">
+                agents IA avancés
+              </span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <Button
                 size="lg"
-                onClick={() => router.push('/chat')}
+                onClick={() => router.push("/chat")}
                 className="bg-serenity-blue hover:bg-serenity-blue/90 text-white px-8 py-4 rounded-2xl font-lato font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Commencer maintenant
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              
+
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => router.push('/prestataire')}
-                className="border-2 border-serenity-accent text-serenity-accent hover:bg-serenity-accent hover:text-white px-8 py-4 rounded-2xl font-lato font-semibold text-lg transition-all duration-300 bg-white/10 backdrop-blur-sm"
+                onClick={() => router.push("/prestataire")}
+                className="border-2 border-serenity-accent text-serenity-accent hover:bg-serenity-accent hover:text-white px-8 py-4 rounded-2xl font-lato font-semibold text-lg transition-all duration-300"
               >
                 <User className="w-5 h-5 mr-2" />
                 Devenir prestataire
               </Button>
             </div>
 
+            {/* Feature Cards */}
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {features.map((feature, index) => (
-                <Card key={index} className="glass-effect border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <Card
+                  key={index}
+                  className="glass-effect border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                >
                   <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <feature.icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-oswald font-semibold mb-2 text-white">
+                    <h3 className="text-xl font-oswald font-semibold mb-2 text-serenity-navy">
                       {feature.title}
                     </h3>
-                    <p className="text-white/70 font-varela">
+                    <p className="text-serenity-navy/70 font-varela">
                       {feature.description}
                     </p>
                   </CardContent>
@@ -116,6 +134,7 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* How it works Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -152,19 +171,21 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-serenity-navy to-serenity-blue text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6">
             Prêt à transformer vos idées ?
           </h2>
           <p className="text-xl font-lato mb-12 opacity-90 max-w-2xl mx-auto">
-            Rejoignez des milliers d'entrepreneurs qui font confiance à Sérénité pour leurs projets
+            Rejoignez des milliers d'entrepreneurs qui font confiance à Sérénité
+            pour leurs projets
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
-              onClick={() => router.push('/chat')}
+              onClick={() => router.push("/chat")}
               className="bg-white text-serenity-navy hover:bg-serenity-light px-8 py-4 rounded-2xl font-lato font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <Bot className="w-5 h-5 mr-2" />
@@ -174,9 +195,26 @@ const Landing = () => {
         </div>
       </section>
 
-      <Footer />
+      <footer className="py-12 px-4 bg-serenity-light border-t border-serenity-lavender/30">
+        <div className="container mx-auto text-center">
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <div className="w-8 h-8 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-lg flex items-center justify-center">
+              <span className="text-white font-oswald font-bold">S</span>
+            </div>
+            <span className="text-xl font-oswald font-semibold text-serenity-navy">
+              Sérénité
+            </span>
+          </div>
+          <p className="text-serenity-navy/60 font-varela mb-4">
+            La plateforme intelligente pour tous vos besoins business
+          </p>
+          <p className="text-sm text-serenity-navy/50 font-varela">
+            © 2024 Sérénité. Tous droits réservés.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
 
-export default Landing; 
+export default Landing;
