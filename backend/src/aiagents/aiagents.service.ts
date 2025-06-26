@@ -22,6 +22,13 @@ export class AiagentsService {
     return this.aiAgentRepository.findOneBy({ name });
   }
 
+  findByOwner(ownerId: string): Promise<AIAgent[]> {
+    return this.aiAgentRepository.find({
+      where: { owner: { id: ownerId } },
+      relations: ['owner'],
+    });
+  }
+
   findBySkill(skillId: string): Promise<AIAgent[]> {
     return this.aiAgentRepository
       .createQueryBuilder('aiAgent')

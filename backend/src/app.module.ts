@@ -5,11 +5,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { UtilsModule } from './utils/utils.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesModule } from './roles/roles.module';
-import { CategoriesModule } from './categories/categories.module';
 import { SkillsModule } from './skills/skills.module';
 import { AiagentsModule } from './aiagents/aiagents.module';
-import { ServicesModule } from './services/services.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ConfigModule } from '@nestjs/config';
 import { AgentsModule } from './agents/agents.module';
@@ -35,11 +32,8 @@ console.log(process.env.POSTGRES_PORT);
     UsersModule,
     AuthModule,
     UtilsModule,
-    RolesModule,
-    CategoriesModule,
     SkillsModule,
     AiagentsModule,
-    ServicesModule,
     ProjectsModule,
     AgentsModule,
     ConversationsModule,

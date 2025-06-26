@@ -1,12 +1,22 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsArray } from 'class-validator';
 
 export class CreateAiAgentDto {
   @IsNotEmpty()
+  @IsString()
   name: string;
+
   @IsOptional()
+  @IsString()
   description?: string;
+
   @IsNotEmpty()
-  url: string;
+  @IsString()
+  link: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  tags?: string[];
 }
 
 export class UpdateAiAgentDto extends CreateAiAgentDto {}

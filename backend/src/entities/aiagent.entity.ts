@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
 } from 'typeorm';
 import { Skill } from './skill.entity';
 import { Project } from './project.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class AIAgent {
@@ -22,7 +24,10 @@ export class AIAgent {
   description: string;
 
   @Column()
-  url: string;
+  link: string;
+
+  @Column('simple-array', { nullable: true })
+  tags: string[];
 
   @CreateDateColumn()
   createdAt: Date;
@@ -37,4 +42,7 @@ export class AIAgent {
   @ManyToMany(() => Project, (project) => project.aiAgents)
   @JoinTable()
   projects: Project[];
+
+  @ManyToOne(() => User, (user) => user.aiAgents, { nullable: false })
+  owner: User;
 }

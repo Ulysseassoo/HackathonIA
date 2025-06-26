@@ -5,7 +5,6 @@ import {
   IsString,
   MinLength,
   IsBoolean,
-  IsUUID,
   IsInt,
   Min,
 } from 'class-validator';
@@ -36,11 +35,51 @@ export class CreateUserDto {
   availableToken?: number;
 
   @IsOptional()
-  @IsUUID()
-  roleId: string;
+  @IsInt()
+  @Min(0)
+  pricePerDay?: number;
+
+  @IsOptional()
+  @IsString()
+  bio?: string;
 }
 
-export class UpdateUserDto extends CreateUserDto {}
+export class UpdateUserDto {
+  @IsOptional()
+  @IsString()
+  fullname?: string;
+
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(6)
+  password?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isVerified?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isServiceProvider?: boolean;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  availableToken?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  pricePerDay?: number;
+
+  @IsOptional()
+  @IsString()
+  bio?: string;
+}
 
 export class LoginUserDto {
   @IsEmail()

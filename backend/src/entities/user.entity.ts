@@ -4,16 +4,13 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
   ManyToMany,
   JoinTable,
   OneToMany,
 } from 'typeorm';
-import { Role } from './role.entity';
 import { Skill } from './skill.entity';
-import { Service } from './service.entity';
 import { Project } from './project.entity';
+import { AIAgent } from './aiagent.entity';
 
 @Entity()
 export class User {
@@ -38,8 +35,11 @@ export class User {
   @Column({ default: 5 })
   availableToken: number;
 
-  @Column()
-  roleId: string;
+  @Column({ default: 0 })
+  pricePerDay: number;
+
+  @Column({ nullable: true })
+  bio: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -47,16 +47,9 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Role, (role) => role.users)
-  @JoinColumn({ name: 'roleId' })
-  role: Role;
-
   @ManyToMany(() => Skill, (skill) => skill.users)
   @JoinTable()
   skills: Skill[];
-
-  @OneToMany(() => Service, (service) => service.user)
-  services: Service[];
 
   @OneToMany(() => Project, (project) => project.owner)
   ownedProjects: Project[];
@@ -64,4 +57,7 @@ export class User {
   @ManyToMany(() => Project, (project) => project.users)
   @JoinTable()
   memberProjects: Project[];
+
+  @OneToMany(() => AIAgent, (aiAgent) => aiAgent.owner)
+  aiAgents: AIAgent[];
 }

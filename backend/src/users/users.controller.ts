@@ -5,15 +5,38 @@ import {
   Body,
   Param,
   Delete,
+  Patch,
   UsePipes,
   ValidationPipe,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dtos/users.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async getCurrentUser(@Request() req) {
+    const user = await this.usersService.findOne(req.user.id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return {
+      id: user.id,
+      fullname: user.fullname,
+      email: user.email,
+      bio: user.bio,
+      isVerified: user.isVerified,
+      isServiceProvider: user.isServiceProvider,
+      availableToken: user.availableToken,
+      pricePerDay: user.pricePerDay,
+    };
+  }
 
   @Get()
   findAll() {
@@ -55,6 +78,25 @@ export class UsersController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
+  }
+
+  @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async updateProfile(
+    @Param('id') id: string, 
+    @Body() updateUserDto: UpdateUserDto & { skills?: string[] }, 
+    @Request() req
+  ) {
+    if (req.user.id !== id) {
+      throw new Error('Unauthorized');
+    }
+    
+    const { skills, ...userData } = updateUserDto;
+    
+    const updatedUser = await this.usersService.update(id, userData);
+    
+    return updatedUser;
   }
 
   @Delete(':id')
