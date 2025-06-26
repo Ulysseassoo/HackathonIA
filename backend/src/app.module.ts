@@ -12,12 +12,16 @@ import { AiagentsModule } from './aiagents/aiagents.module';
 import { ServicesModule } from './services/services.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ConfigModule } from '@nestjs/config';
+import { AgentsModule } from './agents/agents.module';
+import { ConversationsController } from './conversations/conversations.controller';
+import { ConversationsService } from './conversations/conversations.service';
+import { ConversationsModule } from './conversations/conversations.module';
 
 console.log(process.env.POSTGRES_PORT);
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), 
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST || 'localhost',
@@ -37,8 +41,10 @@ console.log(process.env.POSTGRES_PORT);
     AiagentsModule,
     ServicesModule,
     ProjectsModule,
+    AgentsModule,
+    ConversationsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ConversationsController],
+  providers: [AppService, ConversationsService],
 })
 export class AppModule {}
