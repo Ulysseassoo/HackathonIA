@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   return (
@@ -7,9 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
+              <Image src="/mini-logo-black.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded-xl" />
               <span className="text-xl font-semibold bg-gradient-to-r from-serenity-blue to-serenity-accent bg-clip-text text-transparent">
                 Connexio
               </span>
@@ -65,6 +64,7 @@ const Footer = () => {
 
         <div className="border-t border-serenity-lavender/30 mt-8 pt-8 text-center">
           <p className="text-serenity-navy/50 font-varela">
+            <Image src="/mini-logo-black.png" alt="Logo" width={20} height={20} className="inline-block mr-2 align-middle" />
             © 2025 Connexio. Tous droits réservés.
           </p>
         </div>

@@ -18,6 +18,13 @@ export class AiagentsService {
     return this.aiAgentRepository.findOneBy({ id });
   }
 
+  findOneWithOwner(id: AIAgent['id']): Promise<AIAgent | null> {
+    return this.aiAgentRepository.findOne({
+      where: { id },
+      relations: ['owner'],
+    });
+  }
+
   findByName(name: AIAgent['name']): Promise<AIAgent | null> {
     return this.aiAgentRepository.findOneBy({ name });
   }

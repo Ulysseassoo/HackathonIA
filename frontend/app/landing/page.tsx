@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Users, Zap, ArrowRight, Bot, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import Image from 'next/image'
 
 const Landing = () => {
   const router = useRouter();
@@ -64,9 +65,9 @@ const Landing = () => {
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-oswald font-bold mb-6 leading-tight">
-              Bienvenue sur{" "}
-              <span className="bg-gradient-to-r from-serenity-blue to-serenity-accent bg-clip-text text-transparent">
-                Connexio
+              Bienvenue sur{' '}
+              <span className="inline-block align-middle">
+                <Image src="/logo-black.png" alt="Logo" width={180} height={40} className="inline-block align-middle" />
               </span>
             </h1>
 

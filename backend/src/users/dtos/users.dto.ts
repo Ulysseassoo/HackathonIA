@@ -69,11 +69,6 @@ export class UpdateUserDto {
   @IsOptional()
   @IsInt()
   @Min(0)
-  availableToken?: number;
-
-  @IsOptional()
-  @IsInt()
-  @Min(0)
   pricePerDay?: number;
 
   @IsOptional()

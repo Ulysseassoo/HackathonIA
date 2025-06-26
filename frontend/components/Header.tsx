@@ -6,6 +6,7 @@ import { MessageCircle, Menu, X, Home, User, LogOut, ChevronDown } from 'lucide-
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthContext } from './AuthProvider';
 import { logout } from '@/lib/auth';
+import Image from 'next/image';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,12 +55,7 @@ const Header = () => {
             className="flex items-center space-x-2 cursor-pointer group"
             onClick={() => router.push('/')}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-serenity-blue to-serenity-accent rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-oswald font-bold text-lg">C</span>
-            </div>
-            <span className="text-xl font-oswald font-semibold text-serenity-navy group-hover:text-serenity-blue transition-colors">
-              Connexio
-            </span>
+            <Image src="/logo-black.png" alt="Logo" width={36} height={36} className="w-9 h-9 object-contain rounded-xl group-hover:scale-105 transition-transform duration-200" />
           </div>
 
           <nav className="hidden md:flex items-center space-x-1">
@@ -135,6 +131,7 @@ const Header = () => {
                 onClick={() => router.push('/auth')}
                 className="border-serenity-blue text-serenity-blue hover:bg-serenity-blue hover:text-white transition-all duration-200"
               >
+                <Image src="/mini-logo-black.png" alt="Connexion" width={20} height={20} className="inline-block mr-2 align-middle" />
                 Connexion
               </Button>
             )}
@@ -203,6 +200,7 @@ const Header = () => {
                     }}
                     className="w-full border-serenity-blue text-serenity-blue hover:bg-serenity-blue hover:text-white"
                   >
+                    <Image src="/mini-logo-black.png" alt="Connexion" width={20} height={20} className="inline-block mr-2 align-middle" />
                     Connexion
                   </Button>
                 )}

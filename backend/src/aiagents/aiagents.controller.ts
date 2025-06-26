@@ -53,7 +53,7 @@ export class AiagentsController {
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async update(@Param('id') id: string, @Body() updateAiAgentDto: UpdateAiAgentDto, @Request() req) {
-    const agent = await this.aiagentsService.findOne(id);
+    const agent = await this.aiagentsService.findOneWithOwner(id);
     if (!agent || agent.owner.id !== req.user.id) {
       throw new Error('Unauthorized');
     }
@@ -63,7 +63,7 @@ export class AiagentsController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string, @Request() req) {
-    const agent = await this.aiagentsService.findOne(id);
+    const agent = await this.aiagentsService.findOneWithOwner(id);
     if (!agent || agent.owner.id !== req.user.id) {
       throw new Error('Unauthorized');
     }

@@ -86,6 +86,29 @@ const deleteAgent = async (id: string): Promise<void> => {
   }
 };
 
+const updateAgent = async (agentId: string, data: CreateAgentData): Promise<AIAgent> => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${API_URL}/aiagents/update/${agentId}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to update agent');
+  }
+
+  return response.json();
+};
+
 export const useAgents = () => {
   const queryClient = useQueryClient();
 
@@ -122,6 +145,18 @@ export const useAgents = () => {
     },
   });
 
+  const updateAgentMutation = useMutation({
+    mutationFn: ({ agentId, data }: { agentId: string; data: CreateAgentData }) =>
+      updateAgent(agentId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['agents'] });
+      toast.success('Agent IA mis à jour avec succès !');
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Erreur lors de la mise à jour de l\'agent');
+    },
+  });
+
   return {
     agents,
     isLoading,
@@ -131,5 +166,6 @@ export const useAgents = () => {
     deleteAgent: deleteAgentMutation.mutate,
     isCreating: createAgentMutation.isPending,
     isDeleting: deleteAgentMutation.isPending,
+    updateAgent: updateAgentMutation.mutate,
   };
 }; 
