@@ -1,0 +1,73 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: rgba(248, 250, 252, 0.8);
+    --foreground: rgba(30, 41, 59, 0.8);
+
+
+    --card: rgba(255, 255, 255, 0.8);
+    --card-foreground: rgba(30, 41, 59, 0.8);
+
+    --popover: rgba(255, 255, 255, 0.8);
+    --popover-foreground: rgba(30, 41, 59, 0.8);
+
+    --primary: rgba(79, 70, 229, 0.8);
+    --primary-foreground: rgba(248, 250, 252, 0.8);
+
+    --secondary: rgba(241, 245, 249, 0.8);
+    --secondary-foreground: rgba(30, 41, 59, 0.8);
+
+    --muted: rgba(241, 245, 249, 0.8);
+    --muted-foreground: rgba(100, 116, 139, 0.8);
+
+    --accent: rgba(233, 222, 255, 0.8);
+    --accent-foreground: rgba(109, 40, 217, 0.8);
+
+    --destructive: rgba(239, 68, 68, 0.8);
+    --destructive-foreground: rgba(248, 250, 252, 0.8);
+
+    --border: rgba(226, 232, 240, 0.8);
+    --ring: rgba(79, 70, 229, 0.8);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: rgba(248, 250, 252, 0.8);
+    --sidebar-foreground: rgba(51, 65, 85, 0.8);
+    --sidebar-primary: rgba(79, 70, 229, 0.8);
+    --sidebar-primary-foreground: rgba(248, 250, 252, 0.8);
+    --sidebar-accent: rgba(241, 245, 249, 0.8);
+    --sidebar-accent-foreground: rgba(51, 65, 85, 0.8);
+    --sidebar-border: rgba(226, 232, 240, 0.8);
+    --sidebar-ring: rgba(79, 70, 229, 0.8);
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20;
+  }
+  
+  .chat-bubble {
+    @apply rounded-2xl px-4 py-3 max-w-[80%] animate-fade-in;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-nightBlue-600 to-lavender-600 bg-clip-text text-transparent;
+  }
+}

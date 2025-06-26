@@ -1,0 +1,65 @@
+services:
+  database:
+    image: postgres:latest
+    container_name: hackathon_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:latest
+    container_name: hackathon_adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+
+  maildev:
+    image: maildev/maildev
+    container_name: hackathon_maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/backend.dockerfile
+    container_name: hackathon_backend
+    environment:
+      NEST_PORT: ${NEST_PORT}
+    ports:
+      - ${NEST_PORT}:${NEST_PORT}
+      - "5555:5555" # Prisma Studio
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    depends_on:
+      - database
+    env_file:
+      - .env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend.dockerfile
+    container_name: hackathon_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    depends_on:
+      - backend
+    env_file:
+      - .env
+
+volumes:
+  pgdata:
+  backend:
+  frontend:
